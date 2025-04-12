@@ -57,11 +57,19 @@ async function initializeBot() {
     if (btcBalance >= 0.00001) {
       isOpened = true;
       const { data: ticker } = await axios.get(`${API_URL}/api/v3/ticker/price?symbol=${SYMBOL}`);
-      buyPrice = parseFloat(ticker.price);
+
+      if (state.buyPrice === 0) {
+        buyPrice = parseFloat(ticker.price);
+      }
     } else {
       isOpened = false;
       buyPrice = 0;
     }
+
+    if (state.buyPrice > 0) {
+      return;
+    }
+
     saveState({ isOpened, buyPrice });
   } catch (error) {
     console.error("Erro ao inicializar o bot:", error.message);
