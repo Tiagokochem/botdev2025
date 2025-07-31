@@ -51,6 +51,10 @@ let buyPrice = state.buyPrice;
 // Verifica se já existe BTC na conta ao iniciar
 async function initializeBot() {
   try {
+    if (state.buyPrice > 0) {
+      return;
+    }
+
     const btcBalance = await getBalance("BTC");
 
     if (btcBalance >= 0.00001) {
@@ -63,10 +67,6 @@ async function initializeBot() {
     } else {
       isOpened = false;
       buyPrice = 0;
-    }
-
-    if (state.buyPrice > 0) {
-      return;
     }
 
     saveState({ isOpened, buyPrice });
