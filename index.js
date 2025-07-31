@@ -52,7 +52,6 @@ let buyPrice = state.buyPrice;
 async function initializeBot() {
   try {
     const btcBalance = await getBalance("BTC");
-    const usdtBalance = await getBalance("USDT");
 
     if (btcBalance >= 0.00001) {
       isOpened = true;
