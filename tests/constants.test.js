@@ -10,4 +10,9 @@ describe("lib/constants", () => {
   it("taxa total implícita é 0.2% ida e volta", () => {
     expect(constants.FEE_RATE * 2).toBeCloseTo(0.002, 6);
   });
+
+  it("expõe parâmetros de klines", () => {
+    expect(constants.KLINES_LIMIT).toBe(100);
+    expect(constants.KLINES_INTERVAL).toBe("5m");
+  });
 });
